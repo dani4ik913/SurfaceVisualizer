@@ -9,3 +9,14 @@ C:\Users\sevcz\Desktop\Верхотуров - ТВОиП\SurfaceVisualizer\Surfa
 C:\Users\sevcz\Desktop\Верхотуров - ТВОиП\SurfaceVisualizer\SurfaceVisualizer\obj\Debug\SurfaceVisualizer.exe
 C:\Users\sevcz\Desktop\Верхотуров - ТВОиП\SurfaceVisualizer\SurfaceVisualizer\obj\Debug\SurfaceVisualizer.pdb
 C:\Users\sevcz\Desktop\Верхотуров - ТВОиП\SurfaceVisualizer\SurfaceVisualizer\obj\Debug\SurfaceVisualizer.exe.config
+C:\Projects\SurfaceVisualizer\bin\Debug\SurfaceVisualizer.exe.config
+C:\Projects\SurfaceVisualizer\bin\Debug\SurfaceVisualizer.exe
+C:\Projects\SurfaceVisualizer\bin\Debug\SurfaceVisualizer.pdb
+C:\Projects\SurfaceVisualizer\obj\Debug\SurfaceVisualizer.csproj.AssemblyReference.cache
+C:\Projects\SurfaceVisualizer\obj\Debug\SurfaceVisualizer.exe.config
+C:\Projects\SurfaceVisualizer\obj\Debug\SurfaceVisualizer.Form1.resources
+C:\Projects\SurfaceVisualizer\obj\Debug\SurfaceVisualizer.Properties.Resources.resources
+C:\Projects\SurfaceVisualizer\obj\Debug\SurfaceVisualizer.csproj.GenerateResource.cache
+C:\Projects\SurfaceVisualizer\obj\Debug\SurfaceVisualizer.csproj.CoreCompileInputs.cache
+C:\Projects\SurfaceVisualizer\obj\Debug\SurfaceVisualizer.exe
+C:\Projects\SurfaceVisualizer\obj\Debug\SurfaceVisualizer.pdb

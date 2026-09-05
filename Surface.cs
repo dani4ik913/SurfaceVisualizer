@@ -50,9 +50,9 @@ namespace SurfaceVisualizer
                 {
                     double v = vMin + j * dv;
                     // Параметрические уравнения из методички
-                    double x = r * Math.Sin(v) * Math.Cos(v) * Math.Sin(u);
-                    double y = r * Math.Sin(v) * Math.Cos(u);
-                    double z = R * Math.Cos(u);
+                    double x = r * Math.Cos(u) * Math.Sin(v);
+                    double y = r * Math.Cos(v);
+                    double z = R * Math.Sin(u) * Math.Sin(v);
                     _points.Add(new Point3D(x, y, z));
                 }
             }
