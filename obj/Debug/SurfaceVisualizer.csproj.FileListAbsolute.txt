@@ -1,0 +1,11 @@
+C:\Users\sevcz\Desktop\Верхотуров - ТВОиП\SurfaceVisualizer\SurfaceVisualizer\bin\Debug\SurfaceVisualizer.exe.config
+C:\Users\sevcz\Desktop\Верхотуров - ТВОиП\SurfaceVisualizer\SurfaceVisualizer\bin\Debug\SurfaceVisualizer.exe
+C:\Users\sevcz\Desktop\Верхотуров - ТВОиП\SurfaceVisualizer\SurfaceVisualizer\bin\Debug\SurfaceVisualizer.pdb
+C:\Users\sevcz\Desktop\Верхотуров - ТВОиП\SurfaceVisualizer\SurfaceVisualizer\obj\Debug\SurfaceVisualizer.csproj.AssemblyReference.cache
+C:\Users\sevcz\Desktop\Верхотуров - ТВОиП\SurfaceVisualizer\SurfaceVisualizer\obj\Debug\SurfaceVisualizer.Form1.resources
+C:\Users\sevcz\Desktop\Верхотуров - ТВОиП\SurfaceVisualizer\SurfaceVisualizer\obj\Debug\SurfaceVisualizer.Properties.Resources.resources
+C:\Users\sevcz\Desktop\Верхотуров - ТВОиП\SurfaceVisualizer\SurfaceVisualizer\obj\Debug\SurfaceVisualizer.csproj.GenerateResource.cache
+C:\Users\sevcz\Desktop\Верхотуров - ТВОиП\SurfaceVisualizer\SurfaceVisualizer\obj\Debug\SurfaceVisualizer.csproj.CoreCompileInputs.cache
+C:\Users\sevcz\Desktop\Верхотуров - ТВОиП\SurfaceVisualizer\SurfaceVisualizer\obj\Debug\SurfaceVisualizer.exe
+C:\Users\sevcz\Desktop\Верхотуров - ТВОиП\SurfaceVisualizer\SurfaceVisualizer\obj\Debug\SurfaceVisualizer.pdb
+C:\Users\sevcz\Desktop\Верхотуров - ТВОиП\SurfaceVisualizer\SurfaceVisualizer\obj\Debug\SurfaceVisualizer.exe.config
