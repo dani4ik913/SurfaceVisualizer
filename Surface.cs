@@ -17,7 +17,7 @@ namespace SurfaceVisualizer
         private Matrix4x4 _rotationMatrix = new Matrix4x4(); // текущая матрица поворота
 
         // Параметры поверхности (можно будет менять позже)
-        private double R = 52.0, r = 52.0;
+        private double R = 100.0, r = 100.0;
         private double uMin = 0, uMax = 2 * Math.PI;
         private double vMin = 0, vMax = Math.PI;
         private int uSegments = 20, vSegments = 20;

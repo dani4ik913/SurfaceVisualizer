@@ -23,30 +23,30 @@
         #region Код, автоматически созданный конструктором форм Windows
 
         /// <summary>
-        /// Требуемый метод для поддержки конструктора — не изменяйте 
-        /// содержимое этого метода с помощью редактора кода.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.trackBarX = new System.Windows.Forms.TrackBar();
-            this.trackBarY = new System.Windows.Forms.TrackBar();
             this.trackBarZ = new System.Windows.Forms.TrackBar();
+            this.trackBarY = new System.Windows.Forms.TrackBar();
+            this.trackBarX = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarX)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(404, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(384, 201);
+            this.pictureBox1.Size = new System.Drawing.Size(384, 426);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -72,15 +72,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Изменение угла поворота";
             // 
-            // trackBarX
+            // trackBarZ
             // 
-            this.trackBarX.Location = new System.Drawing.Point(6, 37);
-            this.trackBarX.Maximum = 180;
-            this.trackBarX.Minimum = -180;
-            this.trackBarX.Name = "trackBarX";
-            this.trackBarX.Size = new System.Drawing.Size(360, 45);
-            this.trackBarX.TabIndex = 0;
-            this.trackBarX.TickFrequency = 10;
+            this.trackBarZ.Location = new System.Drawing.Point(6, 140);
+            this.trackBarZ.Maximum = 180;
+            this.trackBarZ.Minimum = -180;
+            this.trackBarZ.Name = "trackBarZ";
+            this.trackBarZ.Size = new System.Drawing.Size(360, 45);
+            this.trackBarZ.TabIndex = 2;
+            this.trackBarZ.TickFrequency = 10;
             // 
             // trackBarY
             // 
@@ -92,15 +92,15 @@
             this.trackBarY.TabIndex = 1;
             this.trackBarY.TickFrequency = 10;
             // 
-            // trackBarZ
+            // trackBarX
             // 
-            this.trackBarZ.Location = new System.Drawing.Point(6, 140);
-            this.trackBarZ.Maximum = 180;
-            this.trackBarZ.Minimum = -180;
-            this.trackBarZ.Name = "trackBarZ";
-            this.trackBarZ.Size = new System.Drawing.Size(360, 45);
-            this.trackBarZ.TabIndex = 2;
-            this.trackBarZ.TickFrequency = 10;
+            this.trackBarX.Location = new System.Drawing.Point(6, 37);
+            this.trackBarX.Maximum = 180;
+            this.trackBarX.Minimum = -180;
+            this.trackBarX.Name = "trackBarX";
+            this.trackBarX.Size = new System.Drawing.Size(360, 45);
+            this.trackBarX.TabIndex = 0;
+            this.trackBarX.TickFrequency = 10;
             // 
             // Form1
             // 
@@ -115,11 +115,10 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarX)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         #endregion
