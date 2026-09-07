@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SurfaceVisualizer
@@ -13,41 +7,72 @@ namespace SurfaceVisualizer
     public partial class Form1 : Form
     {
         private Surface _surface;
+        private double _angleX, _angleY, _angleZ;
+        private float _scale = 150f; // <-- масштаб объявлен здесь
+
         public Form1()
         {
             InitializeComponent();
+            // Устанавливаем начальные значения ползунков
+            trackBarN1.Value = 20;
+            trackBarN2.Value = 20;
+            trackBarUlimit.Value = 360;   // 2π
+            trackBarVlimit.Value = 180;   // π
+            trackBarR.Value = 10;         // даёт R = 1.0 (делим на 10)
+            trackBar3.Value = 10;         // даёт r = 1.0
+
+            trackBarX.Value = 0;
+            trackBarY.Value = 0;
+            trackBarZ.Value = 0;
             _surface = new Surface();
 
-            // Подпишемся на события
-            this.pictureBox1.Paint += PictureBox1_Paint;
-            this.trackBarX.Scroll += TrackBar_Scroll;
-            this.trackBarY.Scroll += TrackBar_Scroll;
-            this.trackBarZ.Scroll += TrackBar_Scroll;
+            pictureBox1.Paint += PictureBox1_Paint;
+            pictureBox1.Resize += PictureBox1_Resize;
 
-            // Первоначальный расчёт
-            UpdateSurface();
+            trackBarX.Scroll += (s, e) => UpdateRotation();
+            trackBarY.Scroll += (s, e) => UpdateRotation();
+            trackBarZ.Scroll += (s, e) => UpdateRotation();
+
+            trackBarN1.Scroll += (s, e) => UpdateSurfaceParams();
+            trackBarN2.Scroll += (s, e) => UpdateSurfaceParams();
+            trackBarUlimit.Scroll += (s, e) => UpdateSurfaceParams();
+            trackBarVlimit.Scroll += (s, e) => UpdateSurfaceParams();
+            trackBarR.Scroll += (s, e) => UpdateSurfaceParams();
+            trackBar3.Scroll += (s, e) => UpdateSurfaceParams();
+
+            UpdateSurfaceParams();
+            UpdateRotation();
         }
-        private void TrackBar_Scroll(object sender, EventArgs e)
+
+        private void UpdateRotation()
         {
-            UpdateSurface();
+            _angleX = trackBarX.Value;
+            _angleY = trackBarY.Value;
+            _angleZ = trackBarZ.Value;
+            _surface.Rotate(_angleX, _angleY, _angleZ);
+            pictureBox1.Invalidate();
         }
 
-        private void UpdateSurface()
+        private void UpdateSurfaceParams()
         {
-            // Получаем углы из слайдеров (в градусах)
-            double ax = trackBarX.Value;
-            double ay = trackBarY.Value;
-            double az = trackBarZ.Value;
+            int n1 = trackBarN1.Value;
+            int n2 = trackBarN2.Value;
 
-            // Задаём поворот
-            _surface.Rotate(ax, ay, az);
+            double uLimit = trackBarUlimit.Value * Math.PI / 180.0;
+            double vLimit = trackBarVlimit.Value * Math.PI / 180.0;
+            double R = trackBarR.Value / 10.0;
+            double r = trackBar3.Value / 10.0;
 
-            // Вычисляем смещение для центрирования в PictureBox
+            if (uLimit < 0.01) uLimit = 0.01;
+            if (vLimit < 0.01) vLimit = 0.01;
+
+            _surface.SetParameters(n1, n2, uLimit, vLimit, R, r);
+            _surface.Rotate(_angleX, _angleY, _angleZ);
+
             float centerX = pictureBox1.ClientSize.Width / 2f;
             float centerY = pictureBox1.ClientSize.Height / 2f;
-            _surface.Transform(centerX, centerY);
+            _surface.SetTransform(centerX, centerY, _scale); // используется _scale
 
-            // Перерисовать
             pictureBox1.Invalidate();
         }
 
@@ -57,10 +82,12 @@ namespace SurfaceVisualizer
             _surface.Draw(e.Graphics);
         }
 
-        // При изменении размеров PictureBox – пересчитать центрирование
         private void PictureBox1_Resize(object sender, EventArgs e)
         {
-            UpdateSurface();
+            float centerX = pictureBox1.ClientSize.Width / 2f;
+            float centerY = pictureBox1.ClientSize.Height / 2f;
+            _surface.SetTransform(centerX, centerY, _scale);
+            pictureBox1.Invalidate();
         }
     }
 }

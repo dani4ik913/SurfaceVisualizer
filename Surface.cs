@@ -1,54 +1,86 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SurfaceVisualizer
 {
-    internal class Surface
+    public class Surface
     {
-        private List<Point3D> _points;              // исходные точки (3D)
-        private List<Point3D> _rotatedPoints;       // после поворота
-        private List<PointF> _screenPoints;         // после проецирования и сдвига
-        private List<int[]> _triangles;             // индексы вершин (по 3)
+        // Параметры поверхности (управляются через ползунки)
+        private double R = 1.0;
+        private double r = 1.0;
+        private double uLimit = 2 * Math.PI; // umax, umin = 0
+        private double vLimit = Math.PI;     // vmax, vmin = 0
+        private int uSegments = 20;
+        private int vSegments = 20;
 
-        private Matrix4x4 _rotationMatrix = new Matrix4x4(); // текущая матрица поворота
+        private List<Point3D> _points;
+        private List<int[]> _triangles;
+        private List<Point3D> _rotatedPoints;
+        private List<PointF> _screenPoints;
 
-        // Параметры поверхности (можно будет менять позже)
-        private double R = 100.0, r = 100.0;
-        private double uMin = 0, uMax = 2 * Math.PI;
-        private double vMin = 0, vMax = Math.PI;
-        private int uSegments = 20, vSegments = 20;
-
-        // Сдвиг для центрирования на экране
-        private float _offsetX, _offsetY;
+        private Matrix4x4 _rotationMatrix = new Matrix4x4();
+        private float _offsetX, _offsetY, _scale = 100f;
 
         public Surface()
         {
-            // При создании сразу строим модель
-            BuildModel();
-            // Поворот пока единичный
+            RebuildModel();
             Rotate(0, 0, 0);
+            ApplyTransform();
         }
 
-        // Построение сетки точек и треугольников по параметрическим уравнениям
-        private void BuildModel()
+        // Установка всех параметров поверхности (вызывается из формы)
+        public void SetParameters(int newUSeg, int newVSeg, double newULimit, double newVLimit, double newR, double newRr)
+        {
+            uSegments = newUSeg;
+            vSegments = newVSeg;
+            uLimit = newULimit;
+            vLimit = newVLimit;
+            R = newR;
+            r = newRr;
+            RebuildModel();
+            ApplyTransform();
+        }
+
+        // Отдельные методы (на случай, если понадобятся)
+        public void SetSegments(int uSeg, int vSeg)
+        {
+            uSegments = uSeg;
+            vSegments = vSeg;
+            RebuildModel();
+            ApplyTransform();
+        }
+
+        public void SetLimits(double uLim, double vLim)
+        {
+            uLimit = uLim;
+            vLimit = vLim;
+            RebuildModel();
+            ApplyTransform();
+        }
+
+        public void SetRadii(double newR, double newRr)
+        {
+            R = newR;
+            r = newRr;
+            RebuildModel();
+            ApplyTransform();
+        }
+
+        private void RebuildModel()
         {
             _points = new List<Point3D>();
             _triangles = new List<int[]>();
 
-            double du = (uMax - uMin) / uSegments;
-            double dv = (vMax - vMin) / vSegments;
+            double du = uLimit / uSegments;
+            double dv = vLimit / vSegments;
 
-            // Заполняем точки (сетка размером (uSegments+1) x (vSegments+1))
             for (int i = 0; i <= uSegments; i++)
             {
-                double u = uMin + i * du;
+                double u = i * du;
                 for (int j = 0; j <= vSegments; j++)
                 {
-                    double v = vMin + j * dv;
+                    double v = j * dv;
                     // Параметрические уравнения из методички
                     double x = r * Math.Cos(u) * Math.Sin(v);
                     double y = r * Math.Cos(v);
@@ -57,7 +89,6 @@ namespace SurfaceVisualizer
                 }
             }
 
-            // Формируем треугольники (по два на каждый четырёхугольный сегмент)
             for (int i = 0; i < uSegments; i++)
             {
                 for (int j = 0; j < vSegments; j++)
@@ -67,19 +98,15 @@ namespace SurfaceVisualizer
                     int p10 = (i + 1) * (vSegments + 1) + j;
                     int p11 = p10 + 1;
 
-                    // Первый треугольник (p00, p01, p10)
                     _triangles.Add(new int[] { p00, p01, p10 });
-                    // Второй треугольник (p11, p01, p10) - порядок обхода для согласованности нормалей (не критично для каркаса)
                     _triangles.Add(new int[] { p11, p01, p10 });
                 }
             }
         }
 
-        // Применить матрицу поворота ко всем точкам, спроецировать на XOY и сдвинуть
-        public void Transform(float offsetX, float offsetY)
+        private void ApplyTransform()
         {
-            _offsetX = offsetX;
-            _offsetY = offsetY;
+            if (_points == null) return;
 
             _rotatedPoints = new List<Point3D>();
             foreach (var p in _points)
@@ -89,37 +116,40 @@ namespace SurfaceVisualizer
                 _rotatedPoints.Add(new Point3D(rotated[0], rotated[1], rotated[2]));
             }
 
-            // Проецируем на плоскость XOY (отбрасываем Z) и сдвигаем
             _screenPoints = new List<PointF>();
             foreach (var p in _rotatedPoints)
             {
-                // Масштабирование можно добавить, но пока просто сдвиг
-                float sx = (float)p.X + offsetX;
-                float sy = (float)p.Y + offsetY;
+                float sx = (float)p.X * _scale + _offsetX;
+                float sy = (float)p.Y * _scale + _offsetY;
                 _screenPoints.Add(new PointF(sx, sy));
             }
         }
 
-        // Установить углы поворота (в градусах) и пересчитать матрицу
         public void Rotate(double angleXdeg, double angleYdeg, double angleZdeg)
         {
-            // Переводим в радианы
             double radX = angleXdeg * Math.PI / 180.0;
             double radY = angleYdeg * Math.PI / 180.0;
             double radZ = angleZdeg * Math.PI / 180.0;
 
-            // Строим матрицу поворота: сначала X, затем Y, затем Z (как в методичке)
             var mx = Matrix4x4.RotateX(radX);
             var my = Matrix4x4.RotateY(radY);
             var mz = Matrix4x4.RotateZ(radZ);
             _rotationMatrix = mx.Multiply(my).Multiply(mz);
+
+            ApplyTransform();
         }
 
-        // Отрисовка каркаса (wireframe)
+        public void SetTransform(float offsetX, float offsetY, float scale)
+        {
+            _offsetX = offsetX;
+            _offsetY = offsetY;
+            _scale = scale;
+            ApplyTransform();
+        }
+
         public void Draw(Graphics g)
         {
             if (_screenPoints == null || _triangles == null) return;
-
             using (Pen pen = new Pen(Color.Black, 2))
             {
                 foreach (var tri in _triangles)
@@ -130,19 +160,6 @@ namespace SurfaceVisualizer
                     g.DrawPolygon(pen, new PointF[] { p1, p2, p3 });
                 }
             }
-        }
-
-        // Доступ к параметрам для возможного изменения (позже)
-        public void SetSegments(int uSeg, int vSeg)
-        {
-            uSegments = uSeg; vSegments = vSeg;
-            BuildModel();
-        }
-
-        public void SetRadii(double newR, double newr)
-        {
-            R = newR; r = newr;
-            BuildModel();
         }
     }
 }
