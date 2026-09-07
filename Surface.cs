@@ -21,11 +21,12 @@ namespace SurfaceVisualizer
 
         private Matrix4x4 _rotationMatrix = new Matrix4x4();
         private float _offsetX, _offsetY, _scale = 100f;
+        
+        private int _angleX = 0, _angleY = 0, _angleZ = 0;
 
         public Surface()
         {
             RebuildModel();
-            Rotate(0, 0, 0);
             ApplyTransform();
         }
 
@@ -109,6 +110,7 @@ namespace SurfaceVisualizer
             if (_points == null) return;
 
             _rotatedPoints = new List<Point3D>();
+            
             foreach (var p in _points)
             {
                 var vec = p.ToArray();
@@ -117,6 +119,7 @@ namespace SurfaceVisualizer
             }
 
             _screenPoints = new List<PointF>();
+            
             foreach (var p in _rotatedPoints)
             {
                 float sx = (float)p.X * _scale + _offsetX;
@@ -125,18 +128,28 @@ namespace SurfaceVisualizer
             }
         }
 
-        public void Rotate(double angleXdeg, double angleYdeg, double angleZdeg)
+        public void RotateX(int angle)
         {
-            double radX = angleXdeg * Math.PI / 180.0;
-            double radY = angleYdeg * Math.PI / 180.0;
-            double radZ = angleZdeg * Math.PI / 180.0;
-
-            var mx = Matrix4x4.RotateX(radX);
-            var my = Matrix4x4.RotateY(radY);
-            var mz = Matrix4x4.RotateZ(radZ);
-            _rotationMatrix = mx.Multiply(my).Multiply(mz);
-
+            int delta = _angleX - angle;
+            _rotationMatrix *= Matrix4x4.RotateX(delta * Math.PI / 180.0);
             ApplyTransform();
+            _angleX = angle;
+        }
+        
+        public void RotateY(int angle)
+        {
+            int delta = _angleY - angle;
+            _rotationMatrix *= Matrix4x4.RotateY(delta * Math.PI / 180.0);
+            ApplyTransform();
+            _angleY = angle;
+        }
+        
+        public void RotateZ(int angle)
+        {
+            int delta = _angleZ - angle;
+            _rotationMatrix *= Matrix4x4.RotateZ(delta * Math.PI / 180.0);
+            ApplyTransform();
+            _angleZ = angle;
         }
 
         public void SetTransform(float offsetX, float offsetY, float scale)

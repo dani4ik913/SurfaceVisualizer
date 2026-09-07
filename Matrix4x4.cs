@@ -10,6 +10,8 @@ namespace SurfaceVisualizer
     {
         private double[,] _m = new double[4, 4];
 
+        public static Matrix4x4 operator *(Matrix4x4 a, Matrix4x4 b) => a.Multiply(b);
+
         public Matrix4x4()
         {
             // Инициализация единичной матрицы

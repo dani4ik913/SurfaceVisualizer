@@ -7,7 +7,6 @@ namespace SurfaceVisualizer
     public partial class Form1 : Form
     {
         private Surface _surface;
-        private double _angleX, _angleY, _angleZ;
         private float _scale = 150f; // <-- масштаб объявлен здесь
 
         public Form1()
@@ -29,9 +28,9 @@ namespace SurfaceVisualizer
             pictureBox1.Paint += PictureBox1_Paint;
             pictureBox1.Resize += PictureBox1_Resize;
 
-            trackBarX.Scroll += (s, e) => UpdateRotation();
-            trackBarY.Scroll += (s, e) => UpdateRotation();
-            trackBarZ.Scroll += (s, e) => UpdateRotation();
+            trackBarX.Scroll += (s, e) => UpdateRotationX();
+            trackBarY.Scroll += (s, e) => UpdateRotationY();
+            trackBarZ.Scroll += (s, e) => UpdateRotationZ();
 
             trackBarN1.Scroll += (s, e) => UpdateSurfaceParams();
             trackBarN2.Scroll += (s, e) => UpdateSurfaceParams();
@@ -41,15 +40,23 @@ namespace SurfaceVisualizer
             trackBar3.Scroll += (s, e) => UpdateSurfaceParams();
 
             UpdateSurfaceParams();
-            UpdateRotation();
         }
 
-        private void UpdateRotation()
+        private void UpdateRotationX()
         {
-            _angleX = trackBarX.Value;
-            _angleY = trackBarY.Value;
-            _angleZ = trackBarZ.Value;
-            _surface.Rotate(_angleX, _angleY, _angleZ);
+            _surface.RotateX(trackBarX.Value);
+            pictureBox1.Invalidate();
+        }
+
+        private void UpdateRotationY()
+        {
+            _surface.RotateY(trackBarY.Value);
+            pictureBox1.Invalidate();
+        }
+
+        private void UpdateRotationZ()
+        {
+            _surface.RotateZ(trackBarZ.Value);
             pictureBox1.Invalidate();
         }
 
@@ -67,7 +74,6 @@ namespace SurfaceVisualizer
             if (vLimit < 0.01) vLimit = 0.01;
 
             _surface.SetParameters(n1, n2, uLimit, vLimit, R, r);
-            _surface.Rotate(_angleX, _angleY, _angleZ);
 
             float centerX = pictureBox1.ClientSize.Width / 2f;
             float centerY = pictureBox1.ClientSize.Height / 2f;
