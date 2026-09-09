@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace SurfaceVisualizer
 {
@@ -18,10 +19,11 @@ namespace SurfaceVisualizer
         private List<int[]> _triangles;
         private List<Point3D> _rotatedPoints;
         private List<PointF> _screenPoints;
+        private HashSet<(int, int)> _edges; // кеш уникальных рёбер
 
         private Matrix4x4 _rotationMatrix = new Matrix4x4();
         private float _offsetX, _offsetY, _scale = 100f;
-        
+
         private int _angleX = 0, _angleY = 0, _angleZ = 0;
 
         public Surface()
@@ -103,6 +105,31 @@ namespace SurfaceVisualizer
                     _triangles.Add(new int[] { p11, p01, p10 });
                 }
             }
+
+            // Перестроить кеш рёбер
+            BuildEdgeCache();
+        }
+
+        // Строит множество уникальных рёбер на основе текущих треугольников
+        private void BuildEdgeCache()
+        {
+            _edges = new HashSet<(int, int)>();
+            if (_triangles == null) return;
+
+            foreach (var tri in _triangles)
+            {
+                AddEdgeToSet(_edges, tri[0], tri[1]);
+                AddEdgeToSet(_edges, tri[1], tri[2]);
+                AddEdgeToSet(_edges, tri[2], tri[0]);
+            }
+        }
+
+        // Вспомогательный метод для добавления ребра в HashSet с нормализацией порядка вершин
+        private static void AddEdgeToSet(HashSet<(int, int)> edges, int a, int b)
+        {
+            if (a > b)
+                (a, b) = (b, a);
+            edges.Add((a, b));
         }
 
         private void ApplyTransform()
@@ -110,7 +137,7 @@ namespace SurfaceVisualizer
             if (_points == null) return;
 
             _rotatedPoints = new List<Point3D>();
-            
+
             foreach (var p in _points)
             {
                 var vec = p.ToArray();
@@ -119,7 +146,7 @@ namespace SurfaceVisualizer
             }
 
             _screenPoints = new List<PointF>();
-            
+
             foreach (var p in _rotatedPoints)
             {
                 float sx = (float)p.X * _scale + _offsetX;
@@ -135,7 +162,7 @@ namespace SurfaceVisualizer
             ApplyTransform();
             _angleX = angle;
         }
-        
+
         public void RotateY(int angle)
         {
             int delta = _angleY - angle;
@@ -143,7 +170,7 @@ namespace SurfaceVisualizer
             ApplyTransform();
             _angleY = angle;
         }
-        
+
         public void RotateZ(int angle)
         {
             int delta = _angleZ - angle;
@@ -160,17 +187,21 @@ namespace SurfaceVisualizer
             ApplyTransform();
         }
 
+        // Новый метод Draw, рисующий только уникальные рёбра
         public void Draw(Graphics g)
         {
-            if (_screenPoints == null || _triangles == null) return;
+            if (_screenPoints == null || _edges == null) return;
+
+            // Включаем сглаживание для более красивых линий
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
             using (Pen pen = new Pen(Color.Black, 2))
             {
-                foreach (var tri in _triangles)
+                pen.LineJoin = LineJoin.Round; // для возможных полилиний, но здесь не используется
+
+                foreach (var (a, b) in _edges)
                 {
-                    PointF p1 = _screenPoints[tri[0]];
-                    PointF p2 = _screenPoints[tri[1]];
-                    PointF p3 = _screenPoints[tri[2]];
-                    g.DrawPolygon(pen, new PointF[] { p1, p2, p3 });
+                    g.DrawLine(pen, _screenPoints[a], _screenPoints[b]);
                 }
             }
         }
