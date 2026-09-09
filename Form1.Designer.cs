@@ -30,34 +30,34 @@
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.trackBar3 = new System.Windows.Forms.TrackBar();
+            this.trackBarR = new System.Windows.Forms.TrackBar();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.trackBarVlimit = new System.Windows.Forms.TrackBar();
+            this.trackBarUlimit = new System.Windows.Forms.TrackBar();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.trackBarN2 = new System.Windows.Forms.TrackBar();
+            this.trackBarN1 = new System.Windows.Forms.TrackBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.trackBarZ = new System.Windows.Forms.TrackBar();
             this.trackBarY = new System.Windows.Forms.TrackBar();
             this.trackBarX = new System.Windows.Forms.TrackBar();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.trackBarN2 = new System.Windows.Forms.TrackBar();
-            this.trackBarN1 = new System.Windows.Forms.TrackBar();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.trackBarVlimit = new System.Windows.Forms.TrackBar();
-            this.trackBarUlimit = new System.Windows.Forms.TrackBar();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.trackBar3 = new System.Windows.Forms.TrackBar();
-            this.trackBarR = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarR)).BeginInit();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarVlimit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarUlimit)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarN2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarN1)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarX)).BeginInit();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarN2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarN1)).BeginInit();
-            this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarVlimit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarUlimit)).BeginInit();
-            this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarR)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -80,6 +80,97 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Операции";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.trackBar3);
+            this.groupBox5.Controls.Add(this.trackBarR);
+            this.groupBox5.Location = new System.Drawing.Point(6, 500);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(372, 137);
+            this.groupBox5.TabIndex = 5;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Изменение радиуса";
+            // 
+            // trackBar3
+            // 
+            this.trackBar3.Location = new System.Drawing.Point(6, 88);
+            this.trackBar3.Maximum = 120;
+            this.trackBar3.Name = "trackBar3";
+            this.trackBar3.Size = new System.Drawing.Size(360, 45);
+            this.trackBar3.TabIndex = 1;
+            this.trackBar3.Value = 10;
+            // 
+            // trackBarR
+            // 
+            this.trackBarR.Location = new System.Drawing.Point(6, 37);
+            this.trackBarR.Maximum = 120;
+            this.trackBarR.Name = "trackBarR";
+            this.trackBarR.Size = new System.Drawing.Size(360, 45);
+            this.trackBarR.TabIndex = 0;
+            this.trackBarR.Value = 10;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.trackBarVlimit);
+            this.groupBox4.Controls.Add(this.trackBarUlimit);
+            this.groupBox4.Location = new System.Drawing.Point(6, 357);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(372, 137);
+            this.groupBox4.TabIndex = 4;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Изменение ограничений";
+            // 
+            // trackBarVlimit
+            // 
+            this.trackBarVlimit.Location = new System.Drawing.Point(6, 88);
+            this.trackBarVlimit.Maximum = 180;
+            this.trackBarVlimit.Name = "trackBarVlimit";
+            this.trackBarVlimit.Size = new System.Drawing.Size(360, 45);
+            this.trackBarVlimit.TabIndex = 1;
+            this.trackBarVlimit.TickFrequency = 10;
+            this.trackBarVlimit.Value = 10;
+            // 
+            // trackBarUlimit
+            // 
+            this.trackBarUlimit.Location = new System.Drawing.Point(6, 37);
+            this.trackBarUlimit.Maximum = 360;
+            this.trackBarUlimit.Name = "trackBarUlimit";
+            this.trackBarUlimit.Size = new System.Drawing.Size(360, 45);
+            this.trackBarUlimit.TabIndex = 0;
+            this.trackBarUlimit.TickFrequency = 10;
+            this.trackBarUlimit.Value = 10;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.trackBarN2);
+            this.groupBox3.Controls.Add(this.trackBarN1);
+            this.groupBox3.Location = new System.Drawing.Point(6, 214);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(372, 137);
+            this.groupBox3.TabIndex = 3;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Изменение количества сегментов";
+            // 
+            // trackBarN2
+            // 
+            this.trackBarN2.Location = new System.Drawing.Point(6, 88);
+            this.trackBarN2.Maximum = 100;
+            this.trackBarN2.Minimum = 10;
+            this.trackBarN2.Name = "trackBarN2";
+            this.trackBarN2.Size = new System.Drawing.Size(360, 45);
+            this.trackBarN2.TabIndex = 1;
+            this.trackBarN2.Value = 10;
+            // 
+            // trackBarN1
+            // 
+            this.trackBarN1.Location = new System.Drawing.Point(6, 37);
+            this.trackBarN1.Maximum = 100;
+            this.trackBarN1.Minimum = 10;
+            this.trackBarN1.Name = "trackBarN1";
+            this.trackBarN1.Size = new System.Drawing.Size(360, 45);
+            this.trackBarN1.TabIndex = 0;
+            this.trackBarN1.Value = 10;
             // 
             // groupBox2
             // 
@@ -123,97 +214,6 @@
             this.trackBarX.TabIndex = 0;
             this.trackBarX.TickFrequency = 10;
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.trackBarN2);
-            this.groupBox3.Controls.Add(this.trackBarN1);
-            this.groupBox3.Location = new System.Drawing.Point(6, 214);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(372, 137);
-            this.groupBox3.TabIndex = 3;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Изменение количества сегментов";
-            // 
-            // trackBarN2
-            // 
-            this.trackBarN2.Location = new System.Drawing.Point(6, 88);
-            this.trackBarN2.Maximum = 100;
-            this.trackBarN2.Minimum = 10;
-            this.trackBarN2.Name = "trackBarN2";
-            this.trackBarN2.Size = new System.Drawing.Size(360, 45);
-            this.trackBarN2.TabIndex = 1;
-            this.trackBarN2.Value = 10;
-            // 
-            // trackBarN1
-            // 
-            this.trackBarN1.Location = new System.Drawing.Point(6, 37);
-            this.trackBarN1.Maximum = 100;
-            this.trackBarN1.Minimum = 10;
-            this.trackBarN1.Name = "trackBarN1";
-            this.trackBarN1.Size = new System.Drawing.Size(360, 45);
-            this.trackBarN1.TabIndex = 0;
-            this.trackBarN1.Value = 10;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.trackBarVlimit);
-            this.groupBox4.Controls.Add(this.trackBarUlimit);
-            this.groupBox4.Location = new System.Drawing.Point(6, 357);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(372, 137);
-            this.groupBox4.TabIndex = 4;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Изменение ограничений";
-            // 
-            // trackBarVlimit
-            // 
-            this.trackBarVlimit.Location = new System.Drawing.Point(6, 88);
-            this.trackBarVlimit.Maximum = 360;
-            this.trackBarVlimit.Name = "trackBarVlimit";
-            this.trackBarVlimit.Size = new System.Drawing.Size(360, 45);
-            this.trackBarVlimit.TabIndex = 1;
-            this.trackBarVlimit.TickFrequency = 10;
-            this.trackBarVlimit.Value = 10;
-            // 
-            // trackBarUlimit
-            // 
-            this.trackBarUlimit.Location = new System.Drawing.Point(6, 37);
-            this.trackBarUlimit.Maximum = 360;
-            this.trackBarUlimit.Name = "trackBarUlimit";
-            this.trackBarUlimit.Size = new System.Drawing.Size(360, 45);
-            this.trackBarUlimit.TabIndex = 0;
-            this.trackBarUlimit.TickFrequency = 10;
-            this.trackBarUlimit.Value = 10;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.trackBar3);
-            this.groupBox5.Controls.Add(this.trackBarR);
-            this.groupBox5.Location = new System.Drawing.Point(6, 500);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(372, 137);
-            this.groupBox5.TabIndex = 5;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Изменение радиуса";
-            // 
-            // trackBar3
-            // 
-            this.trackBar3.Location = new System.Drawing.Point(6, 88);
-            this.trackBar3.Maximum = 120;
-            this.trackBar3.Name = "trackBar3";
-            this.trackBar3.Size = new System.Drawing.Size(360, 45);
-            this.trackBar3.TabIndex = 1;
-            this.trackBar3.Value = 10;
-            // 
-            // trackBarR
-            // 
-            this.trackBarR.Location = new System.Drawing.Point(6, 37);
-            this.trackBarR.Maximum = 120;
-            this.trackBarR.Name = "trackBarR";
-            this.trackBarR.Size = new System.Drawing.Size(360, 45);
-            this.trackBarR.TabIndex = 0;
-            this.trackBarR.Value = 10;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -225,23 +225,23 @@
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarR)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarVlimit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarUlimit)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarN2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarN1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarZ)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarX)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarN2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarN1)).EndInit();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarVlimit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarUlimit)).EndInit();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarR)).EndInit();
             this.ResumeLayout(false);
 
         }
