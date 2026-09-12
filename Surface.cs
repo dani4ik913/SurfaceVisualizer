@@ -16,7 +16,7 @@ namespace SurfaceVisualizer
         private int vSegments = 20;
 
         private List<Point3D> _points;
-        private List<int[]> _triangles;
+        private List<Triangle> _triangles;
         private List<Point3D> _rotatedPoints;
         private List<PointF> _screenPoints;
         private HashSet<(int, int)> _edges; // кеш уникальных рёбер
@@ -73,7 +73,7 @@ namespace SurfaceVisualizer
         private void RebuildModel()
         {
             _points = new List<Point3D>();
-            _triangles = new List<int[]>();
+            _triangles = new List<Triangle>();
 
             double du = uLimit / uSegments;
             double dv = vLimit / vSegments;
@@ -101,8 +101,8 @@ namespace SurfaceVisualizer
                     int p10 = (i + 1) * (vSegments + 1) + j;
                     int p11 = p10 + 1;
 
-                    _triangles.Add(new int[] { p00, p01, p10 });
-                    _triangles.Add(new int[] { p11, p01, p10 });
+                    _triangles.Add(new Triangle(p00, p01, p10));
+                    _triangles.Add(new Triangle(p11, p01, p10));
                 }
             }
 
@@ -118,9 +118,9 @@ namespace SurfaceVisualizer
 
             foreach (var tri in _triangles)
             {
-                AddEdgeToSet(_edges, tri[0], tri[1]);
-                AddEdgeToSet(_edges, tri[1], tri[2]);
-                AddEdgeToSet(_edges, tri[2], tri[0]);
+                    AddEdgeToSet(_edges, tri.A, tri.B);
+                    AddEdgeToSet(_edges, tri.B, tri.C);
+                    AddEdgeToSet(_edges, tri.C, tri.A);
             }
         }
 
