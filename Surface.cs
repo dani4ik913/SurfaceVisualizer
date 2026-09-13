@@ -22,8 +22,8 @@ namespace SurfaceVisualizer
         private HashSet<(int, int)> _edges; // кеш уникальных рёбер
 
         // Цвета для flat-закраски
-        public Color OutColor = Color.White;  // внешняя сторона
-        public Color InColor = Color.Black;  // внутренняя сторона
+        public Color OutColor = Color.DarkRed;  // внешняя сторона
+        public Color InColor = Color.Cyan;  // внутренняя сторона
 
         // Режим отрисовки: true = flat, false = каркас
         public bool IsFlatMode = false;
@@ -108,8 +108,8 @@ namespace SurfaceVisualizer
                     int p10 = (i + 1) * (vSegments + 1) + j;
                     int p11 = p10 + 1;
 
-                    _triangles.Add(new Triangle(p00, p01, p10));
-                    _triangles.Add(new Triangle(p11, p01, p10));
+                    _triangles.Add(new Triangle(p00, p10, p01));
+                    _triangles.Add(new Triangle(p10, p11, p01));
                 }
             }
 
