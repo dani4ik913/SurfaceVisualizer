@@ -120,12 +120,12 @@ namespace SurfaceVisualizer
 
             if (radioButtonInner.Checked)
             {
-                _surface.InColor = newColor;
+                _surface.OutColor = newColor;
                 panelInner.BackColor = newColor;
             }
             else
             {
-                _surface.OutColor = newColor;
+                _surface.InColor = newColor;
                 panelOuter.BackColor = newColor;
             }
 

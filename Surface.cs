@@ -22,8 +22,8 @@ namespace SurfaceVisualizer
         private HashSet<(int, int)> _edges; // кеш уникальных рёбер
 
         // Цвета для flat-закраски
-        public Color OutColor = Color.DarkRed;  // внешняя сторона
-        public Color InColor = Color.Cyan;  // внутренняя сторона
+        public Color InColor = Color.DarkRed;  // внешняя сторона
+        public Color OutColor = Color.Cyan;  // внутренняя сторона
 
         // Режим отрисовки: true = flat, false = каркас
         public bool IsFlatMode = false;
@@ -226,7 +226,7 @@ namespace SurfaceVisualizer
                 double cos = nz / len;
 
                 // Внешняя или внутренняя сторона
-                Color baseColor = cos >= 0 ? OutColor : InColor;
+                Color baseColor = cos >= 0 ? InColor : OutColor;
                 double k = Math.Abs(cos);
 
                 tri.FillColor = Color.FromArgb(
