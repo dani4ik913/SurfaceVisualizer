@@ -50,6 +50,8 @@ namespace SurfaceVisualizer
             r = newRr;
             RebuildModel();
             ApplyTransform();
+            ReCountColor();
+            
         }
 
         // Отдельные методы (на случай, если понадобятся)
@@ -251,9 +253,9 @@ namespace SurfaceVisualizer
                 {
                     PointF[] pts = new PointF[3]
                     {
-                _screenPoints[tri.A],
-                _screenPoints[tri.B],
-                _screenPoints[tri.C]
+                        _screenPoints[tri.A],
+                        _screenPoints[tri.B],
+                        _screenPoints[tri.C]
                     };
 
                     using (SolidBrush brush = new SolidBrush(tri.FillColor))
