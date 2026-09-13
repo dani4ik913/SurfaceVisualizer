@@ -242,8 +242,6 @@ namespace SurfaceVisualizer
         {
             if (_screenPoints == null) return;
 
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-
             if (IsFlatMode)
             {
                 // ----- Flat-закраска -----
