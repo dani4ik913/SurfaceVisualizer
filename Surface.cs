@@ -96,7 +96,7 @@ namespace SurfaceVisualizer
                     // Параметрические уравнения из методички
                     double x = r * Math.Cos(u) * Math.Sin(v);
                     double y = r * Math.Cos(v);
-                    double z = R * Math.Sin(u) * Math.Sin(v);
+                    double z = r * Math.Sin(u) * Math.Sin(v);
                     _points.Add(new Point3D(x, y, z));
                 }
             }
