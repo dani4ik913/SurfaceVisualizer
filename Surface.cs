@@ -21,6 +21,13 @@ namespace SurfaceVisualizer
         private List<PointF> _screenPoints;
         private HashSet<(int, int)> _edges; // кеш уникальных рёбер
 
+        // Цвета для flat-закраски
+        public Color OutColor = Color.White;  // внешняя сторона
+        public Color InColor = Color.Black;  // внутренняя сторона
+
+        // Режим отрисовки: true = flat, false = каркас
+        public bool IsFlatMode = false;
+
         private Matrix4x4 _rotationMatrix = new Matrix4x4();
         private float _offsetX, _offsetY, _scale = 100f;
 
@@ -187,21 +194,87 @@ namespace SurfaceVisualizer
             ApplyTransform();
         }
 
+        public void ReCountColor()
+        {
+            if (_triangles == null || _rotatedPoints == null) return;
+
+            foreach (Triangle tri in _triangles)
+            {
+                Point3D p0 = _rotatedPoints[tri.A];
+                Point3D p1 = _rotatedPoints[tri.B];
+                Point3D p2 = _rotatedPoints[tri.C];
+
+                // Векторы двух рёбер
+                double ax = p1.X - p0.X, ay = p1.Y - p0.Y, az = p1.Z - p0.Z;
+                double bx = p2.X - p0.X, by = p2.Y - p0.Y, bz = p2.Z - p0.Z;
+
+                // Векторное произведение (нормаль)
+                double nx = ay * bz - az * by;
+                double ny = az * bx - ax * bz;
+                double nz = ax * by - ay * bx;
+
+                double len = Math.Sqrt(nx * nx + ny * ny + nz * nz);
+                if (len < 1e-12)
+                {
+                    tri.FillColor = Color.Black;
+                    continue;
+                }
+
+                // Источник света и наблюдатель: L = (0, 0, 1)
+                double cos = nz / len;
+
+                // Внешняя или внутренняя сторона
+                Color baseColor = cos >= 0 ? OutColor : InColor;
+                double k = Math.Abs(cos);
+
+                tri.FillColor = Color.FromArgb(
+                    (int)Math.Min(255, baseColor.R * k),
+                    (int)Math.Min(255, baseColor.G * k),
+                    (int)Math.Min(255, baseColor.B * k)
+                );
+            }
+        }
+
         // Новый метод Draw, рисующий только уникальные рёбра
         public void Draw(Graphics g)
         {
-            if (_screenPoints == null || _edges == null) return;
+            if (_screenPoints == null) return;
 
-            // Включаем сглаживание для более красивых линий
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            using (Pen pen = new Pen(Color.Black, 2))
+            if (IsFlatMode)
             {
-                pen.LineJoin = LineJoin.Round; // для возможных полилиний, но здесь не используется
+                // ----- Flat-закраска -----
+                if (_triangles == null) return;
 
-                foreach (var (a, b) in _edges)
+                foreach (Triangle tri in _triangles)
                 {
-                    g.DrawLine(pen, _screenPoints[a], _screenPoints[b]);
+                    PointF[] pts = new PointF[3]
+                    {
+                _screenPoints[tri.A],
+                _screenPoints[tri.B],
+                _screenPoints[tri.C]
+                    };
+
+                    using (SolidBrush brush = new SolidBrush(tri.FillColor))
+                    {
+                        g.FillPolygon(brush, pts);
+                    }
+                }
+            }
+            else
+            {
+                // ----- Каркас -----
+                if (_edges == null) return;
+
+                using (Pen pen = new Pen(Color.Black, 2))
+                {
+                    pen.LineJoin = LineJoin.Round;
+
+                    foreach (var (a, b) in _edges)
+                    {
+                        g.DrawLine(pen, _screenPoints[a], _screenPoints[b]);
+                    }
                 }
             }
         }

@@ -95,5 +95,53 @@ namespace SurfaceVisualizer
             _surface.SetTransform(centerX, centerY, _scale);
             pictureBox1.Invalidate();
         }
+
+        private void radioButtonFlat_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_surface == null) return;
+
+            _surface.IsFlatMode = radioButtonFlat.Checked;
+
+            if (_surface.IsFlatMode)
+                _surface.ReCountColor();
+
+            pictureBox1.Invalidate();
+        }
+
+        private void trackBarRed_Scroll(object sender, EventArgs e)
+        {
+            if (_surface == null) return;
+
+            Color newColor = Color.FromArgb(
+                trackBarRed.Value,
+                trackBarGreen.Value,
+                trackBarBlue.Value
+            );
+
+            if (radioButtonInner.Checked)
+            {
+                _surface.InColor = newColor;
+                panelInner.BackColor = newColor;
+            }
+            else
+            {
+                _surface.OutColor = newColor;
+                panelOuter.BackColor = newColor;
+            }
+
+            _surface.ReCountColor();
+            pictureBox1.Invalidate();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // начальные значения ползунков (белый)
+            trackBarRed.Value = 255;
+            trackBarGreen.Value = 255;
+            trackBarBlue.Value = 255;
+
+            panelOuter.BackColor = Color.White;
+            panelInner.BackColor = Color.Black;
+        }
     }
 }
